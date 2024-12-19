@@ -1,0 +1,7 @@
+---
+- name: Play to test the terraform collections
+  hosts: all
+  tasks:
+    - name: Print the msg
+      debug:
+        msg: "Hello Terraform, this is to test the collections download"
