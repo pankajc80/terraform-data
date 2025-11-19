@@ -46,7 +46,7 @@ name: 'Terraform'
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "main" ]
   pull_request:
 
 permissions:
@@ -95,6 +95,14 @@ jobs:
     - name: Terraform Plan
       id: tfplan
       run: terraform plan -out tfplan.out -input=false
+
+    # Upload the Terraform plan as a build artifact to Repository Actions
+    - name: Upload Terraform Plan Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Terraform Plan
+        path: tfplan.out
+
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
