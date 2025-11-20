@@ -103,12 +103,19 @@ jobs:
         name: Terraform Plan
         path: tfplan.out
 
+  download-plan:
+    name: 'Download Terraform Plan'
+    runs-on: ubuntu-latest
+    needs: fmt-and-plan
+
+    steps:
+
     # Download the Terraform plan artifact for later steps
-    - name: Download Terraform Plan Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: Terraform Plan 
-        path: tfplan.out
+      - name: Download Terraform Plan Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Terraform Plan 
+          path: tfplan.out
 
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
