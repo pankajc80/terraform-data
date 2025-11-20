@@ -72,6 +72,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Remove plan directory if exists
+      run: |
+        if [ -d "tfplan.out" ]; then
+          rm -r tfplan.out
+        fi
+
     # Install the latest version of Terraform CLI
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
