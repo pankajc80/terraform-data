@@ -109,6 +109,9 @@ jobs:
     needs: fmt-and-plan
 
     steps:
+    # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v4
 
     # Download the Terraform plan artifact for later steps
       - name: Download Terraform Plan Artifact
