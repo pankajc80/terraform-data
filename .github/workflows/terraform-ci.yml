@@ -131,7 +131,7 @@ jobs:
 
     # Wait for manual approval before applying the Terraform plan
       - name: Offline review and manual approval of Terraform Plan
-        uses: trstringer/manual-approval-action@v1
+        uses: trstringer/manual-approval@v1
         with:
           approvers: 'pankajc80'
           minimum-approvals: 1
