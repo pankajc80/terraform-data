@@ -50,7 +50,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   AWS_REGION: eu-west-2
