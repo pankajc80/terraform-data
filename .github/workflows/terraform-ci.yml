@@ -117,6 +117,14 @@ jobs:
           name: Terraform Plan 
           path: tfplan.out
 
+      - name: Add and commit plan to repository
+        run: |
+          git config --global user.name 'Pankaj'
+          git config --global user.email 'mrchandna@gmail.com'
+          git add tfplan.out
+          git commit -m "Add Terraform plan artifact"
+          git push origin HEAD:main
+
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
