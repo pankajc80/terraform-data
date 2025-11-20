@@ -51,6 +51,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 env:
   AWS_REGION: eu-west-2
@@ -133,6 +134,7 @@ jobs:
       - name: Offline review and manual approval of Terraform Plan
         uses: trstringer/manual-approval@v1
         with:
+          secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: 'pankajc80'
           minimum-approvals: 1
           issue-title: 'Approve Terraform Plan'
