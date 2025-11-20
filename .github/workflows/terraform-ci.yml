@@ -103,6 +103,7 @@ jobs:
         name: Terraform Plan
         path: tfplan.out
 
+# Job to download the Terraform plan artifact and wait for manual approval before applying
   download-plan:
     name: 'Download Terraform Plan'
     runs-on: ubuntu-latest
@@ -119,14 +120,23 @@ jobs:
         with:
           name: Terraform Plan 
           path: tfplan.out
+    # Add and commit the plan file to the repository
+      - name: Add and commit plan to repository
+        run: |
+          git config --global user.name 'Pankaj'
+          git config --global user.email 'mrchandna@gmail.com'
+          git add tfplan.out
+          git commit -m "Add Terraform plan artifact"
+          git push origin HEAD:main
 
-      # - name: Add and commit plan to repository
-      #   run: |
-      #     git config --global user.name 'Pankaj'
-      #     git config --global user.email 'mrchandna@gmail.com'
-      #     git add tfplan.out
-      #     git commit -m "Add Terraform plan artifact"
-      #     git push origin HEAD:main
+    # Wait for manual approval before applying the Terraform plan
+      - name: Offline review and manual approval of Terraform Plan
+        uses: trstringer/manual-approval-action@v1
+        with:
+          approvers: 'pankajc80'
+          minimum-approvals: 1
+          issue-title: 'Approve Terraform Plan'
+          issue-body: 'Please review and approve the Terraform plan before applying.'
 
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
